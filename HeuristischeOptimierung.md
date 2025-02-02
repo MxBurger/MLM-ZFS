@@ -165,6 +165,7 @@ Diese Probleme sind oft NP-hart, das heißt, es gibt keine effiziente Methode, u
 
 <details>
   <summary>Exkurs NP-Problem (nicht wichtig)</summary>
+
 - $P$ = Probleme, die mit einem deterministischen Algorithmus in polynomieller Zeit gelöst werden können (also "effizient" lösbar)
 - $NP$ = Probleme, die mit einem nicht-deterministischen Algorithmus in polynomieller Zeit gelöst werden können
 - $NP$-hart bedeutet, dass ein Problem mindestens so schwierig wie die schwersten Probleme in $NP$ ist.
@@ -178,3 +179,12 @@ Beispiele:
     - Bei 20 Städten: über 2 Trillionen mögliche Routen
 </details>
 
+
+
+[//]: # ( @Susanne pls insert your stuff here :D )
+
+
+
+Meine Mum hat immer gesagt: "Bua, du bist scho a supa Kerl, oba"
+
+<img src="img/darwin.jpg" width="96">
