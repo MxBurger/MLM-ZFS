@@ -228,8 +228,7 @@ Effekte der Mutationsstärke:
     - Die Suche wird zu zufällig → Der Algorithmus verhält sich wie ein reiner Zufallssuchprozess
     - Es entsteht kein gezielter Fortschritt in Richtung besserer Lösungen
     
-Beispiel:
-
+**Mutation mit kleinen Schritten**  
 $$
 x =
 \begin{pmatrix}
@@ -240,27 +239,28 @@ x =
 \end{pmatrix}
 $$
 
-**Mutation mit kleinen Schritten**  
 Formel:  
 $$x' = x + \text{randn}(1,4) \cdot 0.1$$
+
+... $randn(1,4)$ erzeugt eine Matrix mit 4 zufälligen Werten aus einer Normalverteilung
 
 Beispielhafte Zufallswerte:  
 $$\text{randn}(1,4) =
 \begin{pmatrix}
-    11 \\
-    27 \\
-    22 \\
-    43.9
+    0.1  \\ 
+    -0.2 \\
+    0.3  \\
+    -0.1
 \end{pmatrix}
 $$
 
 Mutation:  
 $$ x' =
 \begin{pmatrix}
-    10 + 11 \cdot 0.1 \\
-    20 + 27 \cdot 0.1 \\
-    30 + 22 \cdot 0.1 \\
-    40 + 43.9 \cdot 0.1 
+    10 + 0.1 \cdot 0.1 \\
+    20 - 0.2 \cdot 0.1 \\
+    30 + 0.3 \cdot 0.1 \\
+    40 - 0.1 \cdot 0.1
 \end{pmatrix}
 $$
 
