@@ -127,9 +127,59 @@ A = [1  2  0]    B = [1  0]    C = [1  0  2]
 ![Erklärung Blockschaltbild](img/ErklaerLinearDiffSystem.svg)
 
 
-## TODO: Formel für numerische Lösung einfügen und erklären
+## Analytische Lösung für Lineare Differentialsysteme
+Die analytische Lösung, existiert zwar theoretisch für jedes lineare Differentialsystem, aber
+- die praktische Berechnung kann sehr komplex oder unmöglich sein, besonders bei:
+- Hoher Systemdimension (große Matrizen)
+- Komplexen Eingangssignalen u(t)
+- unmöglich bei zeitvarianten Systemen ($A, B, C$) ändern sich mit der Zeit
+ Praktisch muss man oft auf numerische Näherungen (Simulation) zurückgreifen, deren Genauigkeit von vielen Faktoren abhängt.
 
-## Eigenschaften von A,B,C- Systemen
+**Bekannte Grundgleichungen:**
+
+(Zustandsgleichung und Ausgangsgleichung) 
+```math
+x'(t) = Ax(t) + Bu(t); \\
+x(0) = x_o \\
+y(t) = Cx(t) 
+```
+
+Die Gleichungen für die **analytische Lösung** lauten:
+```math
+x(t) = e^{tA}x(0) +  \int_{0}^{t} e^{(t-\tau)A} Bu(\tau)d\tau \\
+y(t) = Ce^{tA}x(0) + ∫_{0}^{t} Ce^{(t-\tau)A} Bu(\tau)d\tau
+```
+
+Die Gleichungen für die analytische Lösung beschreiben:
+- Wie sich der Zustand $x(t)$ des Systems zeitlich entwickelt, ausgehend vom Anfangszustand $x(0)$
+- Wie der Ausgang $y(t)$ von diesem Zustand abhängt
+- Wie externe Eingangssignale $u(t)$ das System beeinflussen
+
+Man kann die Gleichungen zum besseren Verständnis in zwei Teile teilen:
+
+| Seite vom $+$  | Ausdruck | Bedeutung   |
+|---|---|---|
+| links   | $e^{tA}x(0)$  | Ist die "freie" Bewegung des Systems <br> Beschreibt wie sich der Anfangszustand $x(0)$ ohne externe Einflüsse entwickelt hätte <br> Die Matrix-Exponentialfunktion $e^{tA}$ beschreibt dabei die "natürliche" Entwicklung  |
+|rechts |$\int_{0}^{t} e^{(t-\tau)A} Bu(\tau)d\tau$| Dies ist die "erzwungene" Bewegung durch die Eingänge <br> Das Integral summiert (kumuliert) alle Eingangseffekte von $0$ bis $t$ auf <br> Für jeden Zeitpunkt $\tau$ wird der Eingang $u(\tau)$ mit $B$ in den Zustandsraum transformiert <br> $e^{(t-\tau)A}$ beschreibt, wie dieser Einfluss bis zum Zeitpunkt t wirkt |
+
+**Das Ergebnis ist also die Summe aus der Entwicklung des Initialzustands plus allen aufakkumulierten Eingangseffekten über die Zeit.**
+
+Tau ($\tau$) ist die Integrationsvariable in dieser Gleichung. Sie ist sozusagen eine "Laufvariable" die von 0 bis t läuft und jeden Zeitpunkt auf diesem Weg repräsentiert.
+
+Mini-Beispiel:
+
+Wenn wir $x(5)$ berechnen wollen (also $t=5$):
+- dann integrieren wir über alle $\tau$ von $0$ bis $5$
+- ein Eingang bei $\tau=2$ wirkt dann für $(5-2)=3$ Zeiteinheiten
+ein Eingang bei $\tau=4$ wirkt nur für $(5-4)=1$ Zeiteinheit
+
+### Herleitung der Formel (hoffentlich kommt das nicht, fml)
+
+![Analytische Herleitung](img/AnalytischeHerleitung.png)
+
+
+
+## Eigenschaften von $A,B,C$- Systemen
 In der LVA haben wir 3 Eigenschaften näher behandelt:
 - Steuerbarkeit
 - Beobachtkarbeit
