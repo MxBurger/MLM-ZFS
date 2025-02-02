@@ -38,22 +38,24 @@ X ($= x1,x2,x3,...,x_n$) Y ($= y1,y2,y3,...,y_n$) und Q ($= q1,q2,q3,...,q_n$):
 
 ### Beispiel: Lineares Oszillationssystem basierend auf Newtonschen Mechanik.
 - Grundsatz:
-    - $ m \cdot a = \sum F \rightarrow $ "Masse * Beschleunigung = Summe aller Kräfte"
+    - $m \cdot a = \sum F \rightarrow$ "Masse * Beschleunigung = Summe aller Kräfte"
     
 - Beschreibung:
-    - Masse $ m $, die sich horizontal bewegen kann
-    - Feder $ k $, die die Masse zurück zur Ruhelage zieht
-    - Dämpfer $ d $, der die Bewegung der Masse verlangsamt
-    - äußeren Kraft $ F(t) $, die auf die Masse wirkt
-    - Position der Masse $ x $
-    - Geschwindigkeit der Masse $ v $
-    - ![MasseFederDämpfer](img/MasseFederDämpfer.png)
+    - Masse $m$, die sich horizontal bewegen kann
+    - Feder $k$, die die Masse zurück zur Ruhelage zieht
+    - Dämpfer $d$, der die Bewegung der Masse verlangsamt
+    - äußeren Kraft $F(t)$, die auf die Masse wirkt
+    - Position der Masse $x$
+    - Geschwindigkeit der Masse $v$
+    
+![MasseFederDämpfer](img/MasseFederDämpfer.png)
 - Bewegungsgleichung:
-    - $ m \frac{d^2x}{dt^2} = F(t) - kx - dv $
+    - $m \frac{d^2x}{dt^2} = F(t) - kx - dv$
 - Zustandsraumdarstellung:
-    - $ \frac{dx}{dt} = v \rightarrow $
-    - $ \frac{dv}{dt} = \frac{d^2x}{dt^2} = \frac{1}{m} (F(t) - kx - dv) $
-    - ![MasseFederDämpferSimulink](img/MasseFederDämpferSimulink.png)
+    - $\frac{dx}{dt} = v \rightarrow$
+    - $\frac{dv}{dt} = \frac{d^2x}{dt^2} = \frac{1}{m} (F(t) - kx - dv)$
+    
+![MasseFederDämpferSimulink](img/MasseFederDämpferSimulink.png)
 
 ### Beispiel: Mondlandung - siehe Unterlagen :)
 
@@ -70,29 +72,29 @@ X ($= x1,x2,x3,...,x_n$) Y ($= y1,y2,y3,...,y_n$) und Q ($= q1,q2,q3,...,q_n$):
     - **Approximation / Schätzung:** Der nächste Zustandswert wird basierend auf bekannten Werten und einem gewählten Integrationsverfahren geschätzt.
 
 - **Theoretisch exakte Lösung: Taylor-Reihe**
-    - $ q_{i+1} = q_i + h \cdot f(q_i) + \frac{h^2}{2!} \cdot f'(q_i) + \frac{h^3}{3!} \cdot f''(q_i) + ... $
+    - $q_{i+1} = q_i + h \cdot f(q_i) + \frac{h^2}{2!} \cdot f'(q_i) + \frac{h^3}{3!} \cdot f''(q_i) + ...$
     - Erklärung: der Funktionswert an der nächsten Stelle wird als eine unendliche Summe von Ableitungen an der aktuellen Stelle berechnet/aproximiert.
     - In der Praxis ist das jedoch oft nicht möglich -> Näherungsmethoden werden verwendet
     - Die anderen Integrationsmethoden werden mit Taylor-Reihen verglichen, um den Fehler zu bestimmen -> $(O(h^2))$, wobei $h$ die Schrittweite ist.
 
 ## Numerische Integration Methoden
 ### Euler-Verfahren
-- $ q_{i+1} = q_i + h \cdot f(q_i) $
+- $q_{i+1} = q_i + h \cdot f(q_i)$
 - lokaler Fehler (Fehler nach einem Schritt): $O(h^2)$
 - globaler Fehler (Fehler über alle Schritte): $O(h)$
 
 ### Heun-Verfahren
-- $ q_{i+1} = q_i + \frac{h}{2} \cdot (f(q_i) + f(q_i + h \cdot f(q_i))) $
+- $q_{i+1} = q_i + \frac{h}{2} \cdot (f(q_i) + f(q_i + h \cdot f(q_i)))$
 - lokaler Fehler: $O(h^3)$
 - globaler Fehler: $O(h^2)$
 
 ### Runge-Kutta-Verfahren
 - Berechnung:
-    - $ k_1 = h \cdot f(q_i) $
-    - $ k_2 = h \cdot f(q_i + \frac{k_1}{2}) $
-    - $ k_3 = h \cdot f(q_i + \frac{k_2}{2}) $
-    - $ k_4 = h \cdot f(q_i + k_3) $
-    - $ q_{i+1} = q_i + \frac{1}{6} \cdot (k_1 + 2k_2 + 2k_3 + k_4) $
+    - $k_1 = h \cdot f(q_i)$
+    - $k_2 = h \cdot f(q_i + \frac{k_1}{2})$
+    - $k_3 = h \cdot f(q_i + \frac{k_2}{2})$
+    - $k_4 = h \cdot f(q_i + k_3)$
+    - $q_{i+1} = q_i + \frac{1}{6} \cdot (k_1 + 2k_2 + 2k_3 + k_4)$
 - lokaler Fehler: $O(h^5)$
 - globaler Fehler: $O(h^4)$
 - Schrittweite wird halbiert wenn der Fehler zu groß ist
@@ -100,12 +102,12 @@ X ($= x1,x2,x3,...,x_n$) Y ($= y1,y2,y3,...,y_n$) und Q ($= q1,q2,q3,...,q_n$):
 ### Runge-Kutta-Verfahren mit automatischer Schrittweitenanpassung
 - Vergleich der Werte von 5. Ordnung und 6. Ordnungsverfahren -> die Differenz wird für die Schrittweitenanpassung verwendet
 - Berechnung:
-    - $ k1 = h \cdot f(q_i) $
-    - $ k2 = h \cdot f(q_i + b_{21} \cdot k1) $
+    - $k1 = h \cdot f(q_i)$
+    - $k2 = h \cdot f(q_i + b_{21} \cdot k1)$
     - ...
-    - $ k6 = h \cdot f(q_i + b_{61} \cdot k1 + b_{62} \cdot k2 + ... + b_{65} \cdot k5) $
-    - $ q_{i+1} = q_i + \sum_{j=1}^{6} c_j k_j (+O(h^6)) $
-    - $ q'_{i+1} = q_i + \sum_{j=1}^{6} c'_j k_j (+O(h^5)) $
+    - $k6 = h \cdot f(q_i + b_{61} \cdot k1 + b_{62} \cdot k2 + ... + b_{65} \cdot k5)$
+    - $q_{i+1} = q_i + \sum_{j=1}^{6} c_j k_j (+O(h^6))$
+    - $q'_{i+1} = q_i + \sum_{j=1}^{6} c'_j k_j (+O(h^5))$
     - b sind die Zwischenstufen-Koeffizienten (geben an, wie frühere k-Werte in die Berechnungen nächster Schritte einfließen) 
     - c sind die Gewichtungskoeffizienten (geben an, wie die k-Werte gewichtet werden)
 
