@@ -17,7 +17,7 @@ Für gegebene Probleme werden Lösungen gesucht; wir verwenden eine Fitnessfunkt
 
 ## Lokale vs. Globale Optima
 
-Eine Funktion $f$ an der Stelle $x_0 \in U  \subseteq \mathbb{R} $ ist ein:
+Eine Funktion $f$ an der Stelle $x_0 \in U  \subseteq \mathbb{R}$ ist ein:
 - **lokales Minimum**, wenn es ein Intervall $I=[a,b]$ gibt, das $x_0$ enthält, sodass $f(x_0)  \leq f(x)$ für alle $x \in I \subseteq U$ gilt
 - **lokales Maximum**, wenn es ein Intervall $I=[a,b]$ gibt, das $x_0$ enthält, sodass $f(x_0) \geq f(x)$ für alle $x \in I \subseteq U$ gilt
 - **globales Minimum**, wenn es ein Intervall $I=[a,b]$ gibt, das $x_0$ enthält, sodass $f(x_0) \leq f(x)$ für alle $x \in U$ gilt
@@ -180,9 +180,67 @@ Beispiele:
 </details>
 
 
+## Ablauf eines Evolutionären Algorithmus
+- **Initalisierung**: Zu Beginn wird eine Startpopulation von Individuen meist zufällig erzeugt. 
+- **Evaluation**: Jedes Individuum wird anhand der Fitness-Funktion bewertet, also wie gut es das Problem löst.
+- **Elternselektion**: Basierend auf den Fitness-Werten werden bestimmte Individuen ausgewählt, um Eltern für die nächste Generation zu werden.
+- **Variation**: Durch Mutation (meist Normalverteilung) und Rekombination entstehen neue Individuen, die die nächste Generation bilden.
+- **Nachkommenselektion**: Die neuen Individuen werden bewertet und die besten werden ausgewählt, um die nächste Generation zu bilden.
 
-[//]: # ( @Susanne pls insert your stuff here :D )
+![Evolutionären Algorithmus Workflow](img/WorkflowEA.png)
 
+## Evolutionsstrategien
+### Eigenschaften 
+- **Genotyp**: Darstellung eines Individuums, meist als Vektor von reelen Zahlen -> repräsentiert eine Eigenschaft oder eine Variable des Lösung
+- **Mutation**: primärer Operator, um neue Individuen zu erzeugen, meist durch normalverteilte, zufällige Störungen der Werte im Genotyp
+- **Rekombination**: sekundärer Operator, der oft gar nicht verwendet wird. Falls er genutzt wird, kombiniert er Informationen aus mehreren Elternindividuen
+- **Selektion**: Auswahl der Nachkommen, erfolgt meist deterministisch anhand der Fitness-Werte, keine Skalierung der Fitness-Werte
+- **Eignung**: besonders geeignet für numerische (realwertige) Optimierungsprobleme, bei denen die Lösung als kontinuierlicher Wertebereich dargestellt werden kann
+
+### Hauptmerkmale 
+Anzahl der Individuen:
+- $\mu$: Anzahl der Eltern/Individuen
+- $\lambda$: Anzahl der Nachkommen (wobei $\mu \leq \lambda$ sein sollte)
+
+Mutanten:
+- Eltern und Nachkommen werden auch als Mutanten bezeichnet
+
+Bekannte Selektionsstrategien:
+- $(\mu + \lambda)$: 
+    - beste Auswahl aus Eltern und Nachkommen
+- $(\mu, \lambda)$: 
+    - nur die besten Nachkommen werden ausgewählt
+- $(1 + 1)$:
+    - ein Elternindividuum erzeugt einen Nachkommen
+- $(1 + \lambda)$:
+    - eine Elternindividuum erzeugt mehrere Nachkommen
+
+## Mutation
+Wird oft durch Gauß-Verteilung modelliert: $N(0, \delta)$
+- Mittelwert der Mutation ist 0 (keine Verschiebung)
+- Erwartungswert $\delta$ bestimmt die Breite/Stärke der Mutation (wie stark die Änderungen an den Individuen sind)
+
+Effekte der Mutationsstärke:
+- **Zu klein**: 
+    - Die Suche ist zu eingeschränkt → Lokale Optima werden schwer gefunden
+    - Erhöhte Rechenzeit, da nur kleine Verbesserungen gemacht werden
+- **Zu groß**: 
+    - Die Suche wird zu zufällig → Der Algorithmus verhält sich wie ein reiner Zufallssuchprozess
+    - Es entsteht kein gezielter Fortschritt in Richtung besserer Lösungen
+
+## 1/5-Erfolgsregel für die Anpassung der Mutationsbreite
+
+Um die Mutationsstärke dynamisch anzupassen, wird die 1/5-Erfolgsregel verwendet:
+- Der Anteil erfolgreicher Mutationen (also Mutationen, die zu einer besseren Lösung führen) sollte 1/5 = 20% betragen.
+- Falls der Anteil an erfolgreichen Mutationen größer als 1/5 ist, wird die Mutationsbreite erhöht.
+- Falls der Anteil an erfolgreichen Mutationen kleiner als 1/5 ist, wird die Mutationsbreite verringert.
+
+Implementierung:
+- In den letzten 10n Iterationen wird der Anteil der erfolgreichen Mutationen s berechnet
+- Aktualisierung der Mutationsbreite alle n Iterationen:
+    - Falls s > 1/5: $\delta = c_d \delta(t-n)$ mit $c_d = 0.82$ (Reduzierung)
+    - Falls s < 1/5: $\delta = c_i \delta(t+n)$ mit $c_i = 1/0.82 = 1.22$ (Erhöhung)
+    - Falls s = 1/5: $\delta = \delta(t)$
 
 
 Meine Mum hat immer gesagt: "Bua, du bist scho a supa Kerl, oba"
