@@ -127,7 +127,7 @@ $S=(T, A, B, Q, \delta, \lambda)$ (System, Automat)
 - $B$ Ausgangsdomäne (Ausgangsbereich)
 - $Q$ Zustands-Menge
 - $\delta : Q \times A \rightarrow Q$ globale Zustandsübergangsfunktion
-- $\lambda : Q \times B \rightarrow Q$ Ausgabefunktion
+- $\lambda : Q \times A \rightarrow B$ Ausgabefunktion
 
 Die Zustandsübergangsfunktion $\delta$ definiert, wie sich der Systemzustand basierend auf dem aktuellen Zustand und Eingang ändert. Die Ausgabefunktion $\lambda$ bestimmt, welche Ausgabe das System bei gegebenem Zustand und Eingang erzeugt.
 
