@@ -8,6 +8,8 @@
 
 [Kontinuierliche Simulation](KontinuierlicheSimulation.md)
 
+[Heuristische Optimierung](HeuristischeOptimierung.md)
+
 ## Mrs Mayrhuber
 
 skippy di skip
