@@ -17,10 +17,10 @@ DESS sind Systeme, die durch Differentialgleichungen beschrieben werden.
 ### Komponenten des DESS:
 * **DESS = <X, Y, Q, f, λ>**
 
-- **X (Eingabedomain)**:
+- **X (Eingabedomäne)**:
    - Bereich der Eingabewerte (z.b. Steuergröße, äußere Anregung)
 
-- **Y (Ausgabedomain)**:
+- **Y (Ausgabedomäne)**:
    - Bereich der Ausgangswerte des Systems (z.B. Messgröße, Reaktion des Systems)	
 
 - **Q (Menge der Zustände)**:
@@ -52,12 +52,27 @@ X ($= x1,x2,x3,...,x_n$) Y ($= y1,y2,y3,...,y_n$) und Q ($= q1,q2,q3,...,q_n$):
 - Bewegungsgleichung:
     - $m \frac{d^2x}{dt^2} = F(t) - kx - dv$
 - Zustandsraumdarstellung:
-    - $\frac{dx}{dt} = v \rightarrow$
+    - $\frac{dx}{dt} = v$ 
     - $\frac{dv}{dt} = \frac{d^2x}{dt^2} = \frac{1}{m} (F(t) - kx - dv)$
     
 ![MasseFederDämpferSimulink](img/MasseFederDämpferSimulink.png)
 
-### Beispiel: Mondlandung - siehe Unterlagen :)
+### Beispiel: Mondlandung 
+- Radius des Mondes $r$
+- Masse des Mondes $c2$
+- Abziehungskraft des Mondes $F_{moon} = \frac{c2}{(r+h)^2}$
+- 2 Bremsmotoren
+    - Die Triebwerke werden in bestimmten Zeitintervallen aktiviert: Startzeiten $t1$ und $t2$ und Stopzeiten $t3$ und $t4$
+    - Schubkraft für 1. Triebwerk: f1 = $f1_ if t1 \leq t \leq t3$ else 0
+    - Schubkraft für 2. Triebwerk:  f2 = $f2_ if t2 \leq t \leq t4$ else 0
+    - Gesamte Schubkraft: $thrust = f1 + f2$
+- Bewegungsgleichung: $m \frac{dh}{dt^2} = thrust - m \cdot g$
+- Beschleunigung: $\frac{dh}{dt^2} = \frac{thrust}{m} - \frac{c2}{(r+h)^2}$
+- Zusatz -> mit dem Einsatz der Bremsmotoren, verringert sich die Gesamtmasse (Treibstoffverbrauch): $\frac{dm}{dt} = -(c_{11} * thrust_1 + c_{12} * thrust_2)$
+    - Verbrauchsfaktoren $c_{11}$ und $c_{12}$
+
+Daraus resultiert das folgende Modell:
+![LunarLanderWithMassReduction](img/LunarLanderWithMassReduction.png)
 
 ## Numerische Integration
 - **Problem Formulierung**
