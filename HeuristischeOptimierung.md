@@ -227,6 +227,43 @@ Effekte der Mutationsstärke:
 - **Zu groß**: 
     - Die Suche wird zu zufällig → Der Algorithmus verhält sich wie ein reiner Zufallssuchprozess
     - Es entsteht kein gezielter Fortschritt in Richtung besserer Lösungen
+    
+Beispiel:
+
+$$
+x =
+\begin{pmatrix}
+    10 \\
+    20 \\
+    30 \\
+    40 \\
+\end{pmatrix}
+$$
+
+**Mutation mit kleinen Schritten**  
+Formel:  
+$$x' = x + \text{randn}(1,4) \cdot 0.1$$
+
+Beispielhafte Zufallswerte:  
+$$\text{randn}(1,4) =
+\begin{pmatrix}
+    11 \\
+    27 \\
+    22 \\
+    43.9
+\end{pmatrix}
+$$
+
+Mutation:  
+$$ x' =
+\begin{pmatrix}
+    10 + 11 \cdot 0.1 \\
+    20 + 27 \cdot 0.1 \\
+    30 + 22 \cdot 0.1 \\
+    40 + 43.9 \cdot 0.1 
+\end{pmatrix}
+$$
+
 
 ## 1/5-Erfolgsregel für die Anpassung der Mutationsbreite
 
