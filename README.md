@@ -14,6 +14,11 @@
 
 [Kontinuierliche Modelle](KontinuierlicheModelle.md)
 
+[Gängige Modelle](GaengigeModelle.md)
+
+[Wachstum und Zerfall](WachstumUndZerfall.md)
+
+[Predator Pray](RaeuberBeute.md)
 
 skippy di skip
 
